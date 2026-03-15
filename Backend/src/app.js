@@ -26,8 +26,10 @@ app.use(cors({
         "https://marthon.vercel.app",
     "https://marthon-ecomm-2qblejllr-abhisheks-projects-ae455745.vercel.app"
     ],
-    credentials:true
+    credentials: true,
+    
 }))
+app.options("*",cors())
 
 // ejs-->
 app.set("view engine", "ejs");
