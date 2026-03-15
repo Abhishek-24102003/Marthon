@@ -1,5 +1,5 @@
 import Addidas from "../components/homeComp/Addidas";
-import Hero from "../components/homeComp/hero";
+import Hero from "../components/homeComp/Hero";
 import HeroPage from "../components/homeComp/HeroPage";
 import Nike from "../components/homeComp/Nike";
 
