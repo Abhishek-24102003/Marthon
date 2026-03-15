@@ -22,7 +22,10 @@ connectCache()
 //for form-data
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
-    origin: "https://marthon-abhisheks-projects-ae455745.vercel.app/",
+    origin: [
+        "https://marthon.vercel.app",
+    "https://marthon-ecomm-2qblejllr-abhisheks-projects-ae455745.vercel.app"
+    ],
     credentials:true
 }))
 
