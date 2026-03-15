@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Access | Marthon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif; /* Fallback to sans-serif */
+        }
+
+        body {
+            background-color: #050505;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: white;
+            overflow: hidden;
+            selection-background-color: #E0FF22;
+            selection-color: #000;
+        }
+
+        /* Cinematic Background Text */
+        .bg-text {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            font-size: 15vw;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            opacity: 0.03;
+            letter-spacing: -0.05em;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glow Effect */
+        .glow {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 40%;
+            height: 40%;
+            background: rgba(224, 255, 34, 0.08);
+            filter: blur(120px);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            line-height: 1;
+        }
+
+        .header h1 span {
+            color: #E0FF22;
+        }
+
+        .header p {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 12px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-left: 4px;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        input:focus {
+            border-color: #E0FF22;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        button {
+            width: 100%;
+            background: #E0FF22;
+            color: black;
+            border: none;
+            border-radius: 16px;
+            padding: 18px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(224, 255, 34, 0.2);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="bg-text">SECURITY</div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Update <span>Access</span></h1>
+            <p>Establish your new account credentials</p>
+        </div>
+
+        <form action="/api/auth/reset-password-success/<%= userId %>" method="POST">
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirmPassword" placeholder="••••••••" required>
+            </div>
+            <button type="submit">Update Password</button>
+        </form>
+    </div>
+</body>
+</html>

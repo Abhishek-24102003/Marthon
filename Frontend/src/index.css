@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@keyframes loading {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* This allows the utility class to work */
+.animate-loading {
+  animation: loading 3.5s ease-in-out ;
+}

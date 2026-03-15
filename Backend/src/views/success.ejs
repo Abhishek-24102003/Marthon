@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success | Marthon</title>
+    <style>
+        /* ... Reuse your existing CSS from the previous layout ... */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #E0FF22;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 0 30px rgba(224, 255, 34, 0.4);
+        }
+        
+        .login-link {
+            display: inline-block;
+            margin-top: 32px;
+            color: black;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            border: 2px solid rgba(224, 255, 34, 0.8);
+            padding: 12px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .login-link:hover {
+            background: #E0FF22;
+            color: black;
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+    <div class="container" style="text-align: center ">
+        <div class="success-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        
+        <div class="header">
+            <h1>Password updated Successfully</h1>
+        </div>
+
+        <a href="http://localhost:5173" class="login-link">Back to Login</a>
+    </div>
+</body>
+</html>
