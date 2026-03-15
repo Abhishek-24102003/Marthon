@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Authlayout from "../layouts/Authlayout";
 import Home from "../pages/Home";
-import PublicRoute from "./publicRoute";
 import { useEffect } from "react";
 import { axiosInstance } from "../Instances/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import CreateProduct from "../pages/CreateProduct";
 import ProductView from "../components/ProductView.JSX";
 import ForgotPassword from "../components/ForgotPassword";
 import ProtectedRoute from "./ProtectedRoute";
+import PublicRoute from "./PublicRoute";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
