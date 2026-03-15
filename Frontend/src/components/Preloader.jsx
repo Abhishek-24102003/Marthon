@@ -1,4 +1,4 @@
-// components/Preloader.jsx
+// components/Preloader
 import React from 'react';
 
 const Preloader = () => {

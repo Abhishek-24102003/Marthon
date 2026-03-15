@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router";
 import { useSelector } from "react-redux";
-import { axiosInstance } from "../Instances/axiosInstance.jsx";
+import { axiosInstance } from "../Instances/axiosInstance";
 import toast, { Toaster } from "react-hot-toast";
 
 const ProductView = () => {

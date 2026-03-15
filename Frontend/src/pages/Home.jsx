@@ -1,7 +1,7 @@
-import Addidas from "../components/homeComp/Addidas.jsx";
+import Addidas from "../components/homeComp/Addidas";
 import Hero from "../components/homeComp/hero";
-import HeroPage from "../components/homeComp/HeroPage.jsx";
-import Nike from "../components/homeComp/Nike.jsx";
+import HeroPage from "../components/homeComp/HeroPage";
+import Nike from "../components/homeComp/Nike";
 
 const Home = () => {
   return <div>

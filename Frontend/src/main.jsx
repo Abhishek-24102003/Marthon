@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client'
 import { useState, useEffect } from 'react'
 import './index.css'
-import AppRouter from './router/AppRouter.jsx'
+import AppRouter from './router/AppRouter'
 import { Provider } from 'react-redux'
-import { store } from './store/store.jsx'
+import { store } from './store/store'
 import Preloader from './components/Preloader' // Path to your preloader
 import { ToastContainer } from 'react-toastify';
 const RootApp = () => {
