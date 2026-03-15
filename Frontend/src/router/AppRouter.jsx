@@ -9,10 +9,10 @@ import HomeLayout from "../layouts/HomeLayout";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
 import CreateProduct from "../pages/CreateProduct";
-import ProductView from "../components/ProductView.JSX";
 import ForgotPassword from "../components/ForgotPassword";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import ProductView from "../components/ProductView";
 
 const AppRouter = () => {
   const dispatch = useDispatch();
