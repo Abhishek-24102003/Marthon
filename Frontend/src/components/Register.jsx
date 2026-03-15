@@ -18,6 +18,9 @@ const Register = ({ setToggle }) => {
        setLoading(true)
       let res = await axiosInstance.post("/auth/register", data);
       if (res) {
+        if (res.data.success) {
+          //send mail 
+        }
         toast.success(res.data.message);
         setOtpSent(true);
       }

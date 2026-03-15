@@ -62,13 +62,14 @@ const hashPass = await bcrypt.hash(password, 10);
   sameSite: "lax",
   path: "/",
 });
-  let msg = await sendmail(newUser.email, "Account validation for Marthon", registerotpTemplate(otpNumber));
+   sendmail(newUser.email, "Account validation for Marthon", registerotpTemplate(otpNumber));
   return res.status(200).json({
     success: true,
     message: "Otp send successfully!!",
     user: newUser,
   });
 });
+
 
 export const verifyOtp = asyncHandler(async(req, res) => {
   let user = req.user;
