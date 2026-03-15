@@ -21,14 +21,12 @@ app.use(cookieParser())
 connectCache()
 //for form-data
 app.use(express.urlencoded({ extended: true }))
-app.use(cors({
-    origin: [
-        "https://marthon.vercel.app",
-    ],
+const corsOptions = {
+    origin: "https://marthon.vercel.app", // Single string is often safer
     credentials: true,
-    
-}))
-app.options("*",cors())
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); 
 
 // ejs-->
 app.set("view engine", "ejs");
