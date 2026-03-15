@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "../Instances/axiosInstance";
 import { toast } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { addUser } from "../features/authSlice";
 const Register = ({ setToggle }) => {
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ const Register = ({ setToggle }) => {
         toast.success(res.data.message);
         setOtpSent(true);
       }
+
     } catch (error) {
       toast.error("Error while register:");
     }
@@ -33,9 +37,12 @@ const Register = ({ setToggle }) => {
   const handleOtpsubmit = async () => {
     try {
      let res = await axiosInstance.post("/auth/verify-otp",{otp})
-      if (res) toast.success(res.data.message)
+      if (res) {
+         toast.success(res.data.message)
       reset()
-       setOtpSent(false)
+        setOtpSent(false)
+        dispatch(addUser(res.data.user))
+      }
   } catch (error) {
     toast.error("Wrong otp please resend!")
       setOtp("")

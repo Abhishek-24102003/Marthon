@@ -88,7 +88,7 @@ export const verifyOtp = asyncHandler(async(req, res) => {
     throw new CustomError(404, "Otp not matched");
   }
   
-  await UserModel.findOneAndUpdate({ _id: user._id }, {
+  let updateUser = await UserModel.findOneAndUpdate({ _id: user._id }, {
     $set: { isVerified: true },
     $unset:{otp:""}
   })
@@ -96,7 +96,8 @@ export const verifyOtp = asyncHandler(async(req, res) => {
 await cacheInstance.del(cacheUserkey)
   res.status(200).json({
     success: true,
-    message:"user registerd!"
+    message: "user registerd!",
+    user:updateUser
   })
 })
 
