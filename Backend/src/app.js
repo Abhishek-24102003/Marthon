@@ -35,6 +35,9 @@ app.set('views', path.join(__dirname, 'views'));
 GoogleStrategyConfig()
 //authPassport
 //apis->>
+app.get("/", (req,res) => {
+    res.send("chal gaya")
+})
 app.use("/api/auth", authRouter);
 app.use("/api/user",userRouter);
 app.use("/api/cart",authMiddleware,cartRouter);
