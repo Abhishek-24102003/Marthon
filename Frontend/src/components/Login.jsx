@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { axiosInstance } from "../Instances/axiosInstance";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { addUser } from "../features/authSlice";
+import { addUser, setIsloading } from "../features/authSlice";
 import {toast} from "react-toastify"
 const Login = ({ setToggle }) => {
   const navigate = useNavigate();
@@ -19,7 +19,9 @@ const Login = ({ setToggle }) => {
       let res = await axiosInstance.post("/auth/login", data);
       if (res) {
         disaptch(addUser(res.data.user));
-        navigate("/home");
+        localStorage.setItem("User",JSON.stringify(res.data.user))
+        disaptch(setIsloading(false))
+        navigate("/homelayout");
       }
     } catch (error) {
       toast.error("Invalid credentials!!")

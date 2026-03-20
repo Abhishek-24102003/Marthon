@@ -17,6 +17,7 @@ const Navbar = () => {
     try {
       await axiosInstance.post("/auth/logout");
       dispatch(removerUser());
+      localStorage.removeItem("User");
       navigate("/");
     } catch (error) {
       alert("failed to logout");
