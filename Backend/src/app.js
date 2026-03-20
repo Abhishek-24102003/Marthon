@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use(cors({
-  origin: true,
+  origin: "https://marthon.vercel.app",
   credentials: true
 }));
 
