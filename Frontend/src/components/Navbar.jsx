@@ -15,9 +15,10 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("User");
       await axiosInstance.post("/auth/logout");
       dispatch(removerUser());
-      localStorage.removeItem("User");
+      
       navigate("/");
     } catch (error) {
       alert("failed to logout");
