@@ -17,8 +17,6 @@ export const registerController = asyncHandler(async (req, res) => {
   }
   const userExist = await UserModel.findOne({ email });
 
-  //for failed register otp valid
- 
 
   if (userExist) {
    const { isExpired } = userExist?.otp;
@@ -56,12 +54,7 @@ const hashPass = await bcrypt.hash(password, 10);
   const token = jwt.sign({ id: newUser._id }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXP,
   });
- res.cookie("token", token, {
-  httpOnly: true,
-  secure: false,
-  sameSite: "lax",
-  path: "/",
-});
+ res.cookie("token", token);
    sendmail(newUser.email, "Account validation for Marthon", registerotpTemplate(otpNumber));
   return res.status(200).json({
     success: true,
