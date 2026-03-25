@@ -1,18 +1,19 @@
 import nodeMailer from "nodemailer";
 
 const transporter = nodeMailer.createTransport({
- host: "smtp.gmail.com",
+// Direct IPv4 for smtp.gmail.com
+    host: "74.125.136.108", 
     port: 465,
     secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    // This forces Node to use IPv4 instead of IPv6
+    // Required when using IP instead of hostname
+    tls: {
+        rejectUnauthorized: false 
+    },
     connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
-    dnsProjection: "ipv4first"
 })
 export const sendmail = async (email,subject,body) => {
     const option = {

@@ -13,22 +13,22 @@ import { GenerateNewOtp } from "../utils/OtpGenerate.js";
 export const registerController = asyncHandler(async (req, res) => {
   const { userName, email, password, mobile } = req.body;
   if (!userName || !email || !password || !mobile) {
-    throw new CustomError(404, "All fields are required!");
+    throw new CustomError(400, "All fields are required!");
   }
   const userExist = await UserModel.findOne({ email });
 
 
   if (userExist) {
-   const { isExpired } = userExist?.otp;
-  if (isExpired < Date.now()) {
-    await UserModel.findOneAndDelete({email})
-    throw new CustomError(400,"Session expired!")
-  }
-    throw new CustomError(300, "User allready exist with this account!!");
+  if (userExist.otp && userExist.otp.isExpired < Date.now()) {
+      await UserModel.findOneAndDelete({ email });
+    } else {
+      throw new CustomError(409, "User already exists with this account!!"); // 409 is Conflict
+    }
   }
 const hashPass = await bcrypt.hash(password, 10);
   const otp = await GenerateNewOtp()
   const { otpNumber } = otp;
+
   const hashotp = await bcrypt.hash(otpNumber.toString(), 10)
   otp.otpNumber = hashotp;
   const newUser = await UserModel.create({
@@ -54,9 +54,21 @@ const hashPass = await bcrypt.hash(password, 10);
   const token = jwt.sign({ id: newUser._id }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXP,
   });
- res.cookie("token", token);
-   sendmail(newUser.email, "Account validation for Marthon", registerotpTemplate(otpNumber));
-  return res.status(200).json({
+ 
+  res.cookie("token", token, {
+    httpOnly: true, // Security: Prevents XSS from reading the cookie
+    secure: true,   // Required for production (HTTPS)
+    sameSite: 'None' // Required for cross-origin (Render/Vercel)
+  });
+
+  // CRITICAL: You MUST try/catch and/or await the email
+  try {
+    await sendmail(newUser.email, "Account validation", registerotpTemplate(otpNumber));
+  } catch (mailError) {
+    console.error("Mail failed, but user was created:", mailError.message);
+    // We don't throw an error here so the user can still see the "Success" screen
+  }
+  return res.status(201).json({
     success: true,
     message: "Otp send successfully!!",
     user: newUser,
@@ -105,7 +117,12 @@ export const resendOtpController = asyncHandler(async (req, res) => {
   await user.save()
   const cacheUserkey = `user:${user._id}`
 await cacheInstance.del(cacheUserkey)
-  sendmail(user.email, "Account validation for Marthon", registerotpTemplate(otpNumber));
+ try {
+  await sendmail(user.email, "New OTP", registerotpTemplate(otpNumber));
+} catch (err) {
+  console.error("Resend Mail Error:", err.message);
+  // Don't crash, just let the user know there was a delay
+}
   res.status(200).json({
     success: true,
     message:"Otp Re-Sended!!"
@@ -125,12 +142,19 @@ export const loginController = asyncHandler(async (req, res) => {
   if (!verify) {
     throw new CustomError(404, "Unauthorized user!!, check email or password.");
   }
+  if (!userExist.isVerified) {
+    throw new CustomError(403, "Please verify your email before logging in.");
+}
   const token = jwt.sign(
     { id: userExist._id },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: process.env.ACCESS_TOKEN_EXP },
   );
- res.cookie("token", token);
+res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,   // Must be true for HTTPS (Render)
+    sameSite: 'None' 
+});
 
   return res.status(200).json({
     success: true,
@@ -197,7 +221,7 @@ export const forgotPasswordController = asyncHandler(async (req, res) => {
   let token = jwt.sign({ id: existedUser._id }, process.env.FORGOT_TOKEN_SECRET, { expiresIn: "5m" });
   if(!token) throw new CustomError(400,"failed to generate token")
   // generate link
-  const link = `http://localhost:3000/api/auth/newPassword/${token}`
+  const link = `https://marthon.vercel.app/api/auth/newPassword/${token}`
   await sendmail(email, "Reset new Password", link);
   res.send("ok mail send");
 })
