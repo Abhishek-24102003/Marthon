@@ -75,4 +75,4 @@ app.use("/api/cart",authMiddleware,cartRouter);
 app.use("/api/product", productRouter);
 
 //error middleware after apis
-app.use(errorMiddleware)
+app.use(errorMiddleware);
