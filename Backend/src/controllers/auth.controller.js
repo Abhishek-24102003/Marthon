@@ -59,7 +59,8 @@ const hashPass = await bcrypt.hash(password, 10);
   res.cookie("token", token, {
     httpOnly: true, // Security: Prevents XSS from reading the cookie
     secure: true,   // Required for production (HTTPS)
-    sameSite: 'None' // Required for cross-origin (Render/Vercel)
+    sameSite: 'None', // Required for cross-origin (Render/Vercel)
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   // CRITICAL: You MUST try/catch and/or await the email

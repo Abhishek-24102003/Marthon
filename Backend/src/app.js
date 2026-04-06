@@ -15,12 +15,26 @@ import { fileURLToPath } from 'url';
 
 // 1. CORS MUST BE FIRST
 app.use(cors({
-  origin: "https://marthon.vercel.app", 
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "https://marthon.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow OPTIONS
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  preflightContinue: false,       // 👈 cors handles OPTIONS itself
+  optionsSuccessStatus: 204,      // 👈 responds to preflight automatically
 }));
-app.options("*", cors());
+
+// NO app.options() line needed at all ✅
 // 2. Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
