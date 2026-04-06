@@ -20,7 +20,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow OPTIONS
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
+app.options("*", cors());
 // 2. Parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

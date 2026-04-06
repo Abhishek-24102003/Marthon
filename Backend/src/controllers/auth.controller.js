@@ -12,6 +12,7 @@ import { GenerateNewOtp } from "../utils/OtpGenerate.js";
 
 export const registerController = asyncHandler(async (req, res) => {
   const { userName, email, password, mobile } = req.body;
+  
   if (!userName || !email || !password || !mobile) {
     throw new CustomError(400, "All fields are required!");
   }
