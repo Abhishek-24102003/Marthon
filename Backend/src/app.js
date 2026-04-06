@@ -14,6 +14,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 
 // 1. CORS MUST BE FIRST
+app.set("trust proxy", 1);
 app.use((req, res, next) => {
   console.log("INCOMING ORIGIN:", JSON.stringify(req.headers.origin));
   next();
@@ -32,7 +33,7 @@ app.use(cors({
     // Allow requests with no origin (Postman, server-to-server, mobile apps)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin)) {
+    if (allowedOrigins.some(o => origin?.startsWith(o))) {
       callback(null, true);
     } else {
       console.log("CORS BLOCKED:", origin); // 👈 see what's being blocked
@@ -41,7 +42,7 @@ app.use(cors({
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+ allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
   preflightContinue: false,
   optionsSuccessStatus: 204,
 }));
