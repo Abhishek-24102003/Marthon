@@ -17,7 +17,7 @@ import passport from "passport";
 
 const router = express.Router();
 router.post("/register", registerController);
-router.post("/login",authMiddleware, loginController);
+router.post("/login", loginController);
 router.post("/logout", authMiddleware, logoutController);
 router.get("/currentUser", authMiddleware, currentUserController);
 router.post("/verify-otp", authMiddleware, verifyOtp)

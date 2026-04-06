@@ -132,6 +132,7 @@ await cacheInstance.del(cacheUserkey)
 })
 
 export const loginController = asyncHandler(async (req, res) => {
+
   const { userName, password } = req.body;
   if (!userName || !password) {
     throw new CustomError(400, "All fields are required!");
@@ -154,7 +155,7 @@ export const loginController = asyncHandler(async (req, res) => {
   );
 res.cookie("token", token, {
     httpOnly: true,
-    secure: true,   // Must be true for HTTPS (Render)
+    secure: true,   
     sameSite: 'None' 
 });
 
