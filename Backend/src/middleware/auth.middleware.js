@@ -4,7 +4,7 @@ import { cacheInstance } from "../services/Cache.service.js";
 import { CustomError } from "../utils/CustomError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 export const authMiddleware = asyncHandler(async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.token || req.cookies.accessToken ;
   if (!token) throw new CustomError(400, "Token not found");
 
   // Check blacklist

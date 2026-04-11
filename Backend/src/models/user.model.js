@@ -18,7 +18,6 @@ const userSchema = new Schema(
     },
     mobile: {
       type: Number,
-      required: true,
     },
     cart: {
       type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +39,8 @@ const userSchema = new Schema(
    otp: {
   otpNumber: String,
   isExpired: Number
-}
+    },
+   refreshToken:String
   },
   { timestamps: true },
 );

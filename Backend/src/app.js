@@ -63,6 +63,7 @@ const __dirname = path.dirname(__filename);
 // ejs-->
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
+
 // googleAuthStrategy
 GoogleStrategyConfig()
 //authPassport

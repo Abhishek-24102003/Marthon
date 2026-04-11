@@ -9,9 +9,29 @@ import ForgotPassword from "../components/ForgotPassword";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import ProductView from "../components/ProductView";
+import { axiosInstance } from "../Instances/axiosInstance";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { addUser } from "../features/authSlice";
 
 const AppRouter = () => {
- 
+  const dispatch = useDispatch()
+ useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const res = await axiosInstance.get("/auth/current-user", {
+        withCredentials: true,
+      });
+
+      dispatch(addUser(res.data.user));
+      localStorage.setItem("User", JSON.stringify(res.data.user));
+    } catch (err) {
+      console.log("Not logged in");
+    }
+  };
+
+  fetchUser();
+}, []);
   const router = createBrowserRouter([
     {
       path: "/",

@@ -4,6 +4,7 @@ import { axiosInstance } from "../Instances/axiosInstance";
 import { toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { addUser } from "../features/authSlice";
+import GoogleAuthBtn from "./GoogleAuthBtn";
 const Register = ({ setToggle }) => {
   const dispatch = useDispatch()
   const {
@@ -185,28 +186,9 @@ const Register = ({ setToggle }) => {
         </button>
       </form>
          
-      {/* Sign up options
+       Sign up options
       <br />
-      <button
-        onClick={async () => {
-         try {
-           window.location.href = "http://localhost:3000/api/auth/google";
-         } catch (error) {
-          console.log(error);
-          
-         }
-          
-        }}
-        className="flex items-center justify-center gap-3 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white hover:bg-gray-100 transition"
-      >
-        <img
-          src="https://developers.google.com/identity/images/g-logo.png"
-          alt="Google"
-          className="w-5 h-5"
-        />
-
-        <span className="text-gray-700 font-medium">Sign up with Google</span>
-      </button> */}
+     <GoogleAuthBtn/>
        {otpSent?<div className=" text-white flex justify-center items-center gap-2 mt-10 ">
         <input className=" text-white border px-2 py-1 rounded" value={otp} onChange={(e)=>setOtp(e.target.value)} type="text" placeholder=" enter otp " />
         <button

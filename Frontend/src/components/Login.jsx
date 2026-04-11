@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { addUser, setIsloading } from "../features/authSlice";
 import {toast} from "react-toastify"
+import GoogleAuthBtn from "./GoogleAuthBtn";
 const Login = ({ setToggle }) => {
   const navigate = useNavigate();
   const disaptch = useDispatch();
@@ -120,6 +121,8 @@ const Login = ({ setToggle }) => {
             />
           </svg>
         </button>
+        <br />
+        <GoogleAuthBtn/>
       </form>
 
       {/* Sign up options */}

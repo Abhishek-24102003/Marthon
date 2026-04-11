@@ -19,7 +19,7 @@ const router = express.Router();
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.post("/logout", authMiddleware, logoutController);
-router.get("/currentUser", authMiddleware, currentUserController);
+router.get("/current-user", authMiddleware, currentUserController);
 router.post("/verify-otp", authMiddleware, verifyOtp)
 router.post("/resend-otp",authMiddleware,resendOtpController)
 //forgot
