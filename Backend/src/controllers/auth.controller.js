@@ -278,7 +278,7 @@ export const googleOauthController = asyncHandler(async (req, res) => {
     sameSite: "None",
   });
 
-  res.redirect("http://localhost:5173/homelayout");
+  res.redirect("https://marthon.vercel.app/homelayout");
 });
 
 /* ================= FORGOT PASSWORD ================= */
