@@ -9,7 +9,7 @@ export const GoogleStrategyConfig = () => {
       {
         clientID: process.env.GOOGLECLIENT_ID,
         clientSecret: process.env.GOOGLECLIENT_SECRET,
-        callbackURL: "https://marthon.vercel.app/api/auth/callback/google",
+        callbackURL: "https://marthon.onrender.com/api/auth/callback/google",
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
