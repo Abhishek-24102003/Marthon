@@ -1,11 +1,12 @@
 import React from 'react'
+import { axiosInstance } from '../Instances/axiosInstance';
 
 const GoogleAuthBtn = () => {
   return (
      <button
         onClick={async () => {
          try {
-           window.location.href = "http://localhost:3000/api/auth/google";
+           window.location.href = axiosInstance.get("/auth/google")
          } catch (error) {
           console.log(error);
           
